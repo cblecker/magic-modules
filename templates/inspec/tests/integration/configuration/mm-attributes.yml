@@ -53,3 +53,8 @@ health_check:
   timeout_sec: 10
   check_interval_sec: 10
   tcp_health_check_port: 80
+
+regional_cluster:
+  name: inspec-gcp-regional-cluster
+  region: europe-west2
+  initial_node_count: 3

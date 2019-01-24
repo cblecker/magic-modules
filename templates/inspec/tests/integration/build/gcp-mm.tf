@@ -38,6 +38,10 @@ variable "health_check" {
   type = "map"
 }
 
+variable "regional_cluster" {
+  type = "map"
+}
+
 resource "google_compute_ssl_policy" "custom-ssl-policy" {
   name            = "${var.ssl_policy["name"]}"
   min_tls_version = "${var.ssl_policy["min_tls_version"]}"
@@ -139,5 +143,12 @@ resource "google_compute_health_check" "gcp-inspec-health-check" {
 
  tcp_health_check {
    port = "${var.health_check["tcp_health_check_port"]}"
- }
+  }
+}
+
+resource "google_container_cluster" "gcp-inspec-regional-cluster" {
+  project = "${var.gcp_project_id}"
+  name = "${var.regional_cluster["name"]}"
+  region = "${var.regional_cluster["region"]}"
+  initial_node_count = "${var.regional_cluster["initial_node_count"]}"
 }
